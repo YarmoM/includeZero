@@ -7,6 +7,10 @@ function h = includeZero(varargin)
 %
 %   includeZero(x, y) overrules the coordinates for the invisible point.
 
+    % Check current status of ishold and set hold to on
+    currIshold = ishold();
+    hold('on');
+
     % Handle input/output
     p = inputParser();
     p.addOptional('x', 0);
@@ -20,5 +24,10 @@ function h = includeZero(varargin)
     
     % Prevent a legend entry
     set(get(get(h, 'Annotation'), 'LegendInformation'), 'IconDisplayStyle', 'off');
+    
+    % Set hold to off if it originally was
+    if ~currIshold
+        hold('off');
+    end
 
 end
